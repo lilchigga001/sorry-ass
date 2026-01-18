@@ -90,15 +90,19 @@ body{
   z-index:1;
 }
 /* decorative columns */
+#columns-section{
+  display:none; /* initially hidden */
+  margin-top:40px;
+}
 #columns{
   display:flex;
   gap:20px;
-  margin-top:40px;
-  opacity:0;
-  transition:opacity 1s ease;
+  justify-content:center;
+  flex-wrap:wrap;
 }
 .column{
   flex:1;
+  min-width:120px;
   background:#3d0f1a;
   height:150px;
   border-radius:10px;
@@ -188,7 +192,7 @@ button:hover{transform:scale(1.05);}
 </section>
 
 <!-- decorative columns -->
-<section id="columns-section" class="hidden">
+<section id="columns-section">
 <div id="columns">
   <div class="column" id="col1">You mean a lot to me 💖</div>
   <div class="column" id="col2">I will never leave you 🫶</div>
@@ -230,11 +234,13 @@ function heartRainBig(){
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),6000);
   }
-  // show columns after short delay
-  setTimeout(()=>{
-    document.getElementById("columns-section").classList.remove("hidden");
-    lightUpColumns();
-  },2000);
+
+  // Show columns immediately after YES
+  const colSection = document.getElementById("columns-section");
+  colSection.style.display = "flex";  // make section visible
+  setTimeout(lightUpColumns,500);      // start lighting columns
+
+  // Show forgive message after delay
   setTimeout(()=>document.getElementById("forgive-msg").classList.remove("hidden"),5000);
 }
 
